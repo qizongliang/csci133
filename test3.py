@@ -22,41 +22,31 @@ print("Tweet with max number of words: ",longestTweet)
 
 # clean the string
 def cleanedup(s):
-    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    alphabet = 'abcdefghijklmnopqrstuvwxyz@'
     cleantext = ''
     for character in s.lower():
         if character in alphabet:
             cleantext += character
+        else:
+            cleantext += ' '
     return cleantext
 
+username = "@spacex"
 
-timeMentioned = 0
-username = "@SPACEX5"
-
+concordance = {}
 with open('elon-musk.txt') as tweetHistory:
     for line in tweetHistory:
-        temp = line.split()
-        for word in temp:
-            if('@' in word):
-                if()
-                if (cleanedup(username) == cleanedup(word)):
-                    print(cleanedup(username), cleanedup(word))
-                    timeMentioned +=1
-            
-                
-print("Mentioned: ", timeMentioned," times.")
+        for word in cleanedup(line).split():
+            if '@' in word:
+                if word in concordance:
+                    concordance[word]+=1
+                else:
+                    concordance[word]=1
+
 while True:
     username = input("Enter username: ")
-    if('@' in username):
-        with open('elon-musk.txt') as tweetHistory:
-            for line in tweetHistory:
-                temp = line.split()
-            for word in temp:
-                if('@' in word):
-                    if (cleanedup(username) == cleanedup(word)):
-                        timeMentioned += 1
-        print("Mentioned: ", timeMentioned," times.")
-        
+    if(username in concordance):
+        print('Found on lines:', concordance[username],'times')
     else:
         print("Not mentioned.")
         
