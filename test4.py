@@ -53,7 +53,7 @@ while True:
         else:
             balance-=1
         roundsPlayed+=1
-        if balance == 0:
+        if (balance <= 0 or balance >= initial *2):
             balance = initial
             gamePlayed += 1
     print('Average number of rounds: ',roundsPlayed/gamePlayed)
